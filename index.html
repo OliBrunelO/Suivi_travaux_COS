@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 1508px;
+            height: 817px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/echelles_ss_parcelles_cos_2024_0.js"></script>
+        <script src="data/routes_St_Estephe_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[45.22749208694236,-0.7867627152389283],[45.2356540883117,-0.765346563635246]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        function pop_echelles_ss_parcelles_cos_2024_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id_parcell'] !== null ? autolinker.link(feature.properties['id_parcell'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['export_Qgi'] !== null ? autolinker.link(feature.properties['export_Qgi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['export_Q_1'] !== null ? autolinker.link(feature.properties['export_Q_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['export_Q_2'] !== null ? autolinker.link(feature.properties['export_Q_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ss_parcell'] !== null ? autolinker.link(feature.properties['ss_parcell'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['surface_ha'] !== null ? autolinker.link(feature.properties['surface_ha'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['layer'] !== null ? autolinker.link(feature.properties['layer'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['path'] !== null ? autolinker.link(feature.properties['path'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['export_avancement_Qgis_Effeuillage Martin_nom_chantier'] !== null ? autolinker.link(feature.properties['export_avancement_Qgis_Effeuillage Martin_nom_chantier'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['export_avancement_Qgis_Effeuillage Martin_nom_equipe'] !== null ? autolinker.link(feature.properties['export_avancement_Qgis_Effeuillage Martin_nom_equipe'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['export_avancement_Qgis_Effeuillage Martin_SS_PARCELLE'] !== null ? autolinker.link(feature.properties['export_avancement_Qgis_Effeuillage Martin_SS_PARCELLE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_echelles_ss_parcelles_cos_2024_0_0(feature) {
+            switch(String(feature.properties['export_avancement_Qgis_Effeuillage Martin_nom_equipe'])) {
+                case 'Martin':
+                    return {
+                pane: 'pane_echelles_ss_parcelles_cos_2024_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(155,129,240,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_echelles_ss_parcelles_cos_2024_0',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,231,138,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_echelles_ss_parcelles_cos_2024_0');
+        map.getPane('pane_echelles_ss_parcelles_cos_2024_0').style.zIndex = 400;
+        map.getPane('pane_echelles_ss_parcelles_cos_2024_0').style['mix-blend-mode'] = 'normal';
+        var layer_echelles_ss_parcelles_cos_2024_0 = new L.geoJson(json_echelles_ss_parcelles_cos_2024_0, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_echelles_ss_parcelles_cos_2024_0',
+            layerName: 'layer_echelles_ss_parcelles_cos_2024_0',
+            pane: 'pane_echelles_ss_parcelles_cos_2024_0',
+            onEachFeature: pop_echelles_ss_parcelles_cos_2024_0,
+            style: style_echelles_ss_parcelles_cos_2024_0_0,
+        });
+        bounds_group.addLayer(layer_echelles_ss_parcelles_cos_2024_0);
+        map.addLayer(layer_echelles_ss_parcelles_cos_2024_0);
+        function pop_routes_St_Estephe_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['osm_id'] !== null ? autolinker.link(feature.properties['osm_id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['type'] !== null ? autolinker.link(feature.properties['type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['oneway'] !== null ? autolinker.link(feature.properties['oneway'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['bridge'] !== null ? autolinker.link(feature.properties['bridge'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tunnel'] !== null ? autolinker.link(feature.properties['tunnel'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['maxspeed'] !== null ? autolinker.link(feature.properties['maxspeed'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['created'] !== null ? autolinker.link(feature.properties['created'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['updated'] !== null ? autolinker.link(feature.properties['updated'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_routes_St_Estephe_1_0() {
+            return {
+                pane: 'pane_routes_St_Estephe_1',
+                opacity: 1,
+                color: 'rgba(136,123,89,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_routes_St_Estephe_1');
+        map.getPane('pane_routes_St_Estephe_1').style.zIndex = 401;
+        map.getPane('pane_routes_St_Estephe_1').style['mix-blend-mode'] = 'normal';
+        var layer_routes_St_Estephe_1 = new L.geoJson(json_routes_St_Estephe_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_routes_St_Estephe_1',
+            layerName: 'layer_routes_St_Estephe_1',
+            pane: 'pane_routes_St_Estephe_1',
+            onEachFeature: pop_routes_St_Estephe_1,
+            style: style_routes_St_Estephe_1_0,
+        });
+        bounds_group.addLayer(layer_routes_St_Estephe_1);
+        map.addLayer(layer_routes_St_Estephe_1);
+        setBounds();
+        var i = 0;
+        layer_echelles_ss_parcelles_cos_2024_0.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['export_avancement_Qgis_Effeuillage Martin_SS_PARCELLE'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['export_avancement_Qgis_Effeuillage Martin_SS_PARCELLE']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_echelles_ss_parcelles_cos_2024_0'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_echelles_ss_parcelles_cos_2024_0]);
+        map.on("zoomend", function(){
+            resetLabels([layer_echelles_ss_parcelles_cos_2024_0]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_echelles_ss_parcelles_cos_2024_0]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_echelles_ss_parcelles_cos_2024_0]);
+        });
+        </script>
+    </body>
+</html>
